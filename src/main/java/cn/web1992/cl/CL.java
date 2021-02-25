@@ -22,6 +22,7 @@ public class CL extends URLClassLoader {
     private static final int BUFFER_SIZE = 4096;
 
     private Map<String, Class> classMap = new HashMap<>();
+    private Map<String, byte[]> bytesMap = new HashMap<>();
     private final HashMap<String, Package> packages = new HashMap<>();
 
     private final ClassLoader parent;
@@ -32,6 +33,8 @@ public class CL extends URLClassLoader {
     }
 
     private native Class<?> makeClass(String name, byte[] bytes);
+
+    public final static native byte[] encByte(byte[] bytes);
 
     static {
         System.loadLibrary("CL");
@@ -89,6 +92,7 @@ public class CL extends URLClassLoader {
 
                 Class<?> definedClass = makeClass(n, bytes);
                 if (definedClass != null) {
+                    bytesMap.put(name, bytes);
                     definePackageIfNecessary(name);
                     classMap.put(name, definedClass);
                 }

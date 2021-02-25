@@ -6,8 +6,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ClassLoaderApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+
+        ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+
+    }
 
 }
