@@ -34,7 +34,7 @@ public class CL extends URLClassLoader {
 
     private native Class<?> makeClass(String name, byte[] bytes);
 
-    public final static native byte[] encByte(byte[] bytes);
+    //public  static native byte[] encByte(byte[] bytes);
 
     static {
         System.loadLibrary("CL");
